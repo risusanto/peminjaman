@@ -39,18 +39,20 @@ class MY_Model extends CI_Model
 		return $query->result();
 	}
 
-	public function get_last_row($cond = '')
+	public function get_last_row($cond = '', $order_by = null)
 	{
 		if (is_array($cond))
 			$this->db->where($cond);
 		if (is_string($cond) && strlen($cond) > 3)
 			$this->db->where($cond);
+		if ($order_by != null)
+			$this->db->order_by($order_by, 'DESC');
 		$this->db->order_by($this->data['primary_key'], 'DESC');
 		$this->db->limit(1);
 		$query = $this->db->get($this->data['table_name']);
 
 		return $query->row();
-	}
+	}	
 
 	public function get_by_order_limit($ref, $order, $cond = '')
 	{
