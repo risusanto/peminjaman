@@ -10,3 +10,4 @@ class Senjata_api_m extends MY_Model
 		$this->data['primary_key']	= 'no_senpi';
 	}
 }
+
