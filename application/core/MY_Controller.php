@@ -17,6 +17,9 @@ class MY_Controller extends CI_Controller
 	    elseif ($template == 'kapolres') {
 	      return $this->load->view('kapolres/template/layout', $data);
 	    }
+      elseif ($template == 'admin-gudang') {
+	      return $this->load->view('admin-gudang/template/layout', $data);
+	    }
 	}
 
 	public function POST($name)
