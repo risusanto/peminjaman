@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  *
  */
-class Kapolres extends MY_Controller
+class Kabag_sumda extends MY_Controller
 {
 
   function __construct()
@@ -27,12 +27,12 @@ class Kapolres extends MY_Controller
 
   public function index()
   {
-    $this->data['title']    ='Dashboard KAPOLRES';
-    $this->data['content']  = 'kapolres/dashboard';
+    $this->data['title']    ='Dashboard KABAG SUMDA';
+    $this->data['content']  = 'kabag_sumda/dashboard';
     $this->data['senpi']    = $this->Senjata_api_m->get();
     $this->data['amunisi']  = $this->Amunisi_m->get();
     $this->data['berita']   = $this->Berita_acara_m->get();
-    $this->template($this->data,'kapolres');
+    $this->template($this->data,'kabag_sumda');
   }
 
   public function senpi(){
@@ -41,7 +41,7 @@ class Kapolres extends MY_Controller
     if($cek_cetak == 'cetak'){
     
       $this->data['senpi'] = $this->Senjata_api_m->get();
-      $html = $this->load->view('kapolres/cetak_senpi', $this->data, true);
+      $html = $this->load->view('kabag_sumda/cetak_senpi', $this->data, true);
       $pdfFilePath = 'Laporan Data Senjata Api - ' . date('Y-m-d') . '.pdf';
       $this->load->library('m_pdf');
       $this->m_pdf->pdf->WriteHTML($html);
@@ -52,22 +52,22 @@ class Kapolres extends MY_Controller
     $this->data['title']    ='Data Senjata Api';
     $this->data['senpi']    = $this->Senjata_api_m->get();
     $this->data['pemohon']  = $this->Pemohon_m->get();
-    $this->data['content']  = 'kapolres/senpi';
-    $this->template($this->data,'kapolres');
+    $this->data['content']  = 'kabag_sumda/senpi';
+    $this->template($this->data,'kabag_sumda');
   }
 
   public function pemasukan_senpi(){
     $this->data['title']    ='Data Pemasukan Senjata Api';
     $this->data['senpi']    = $this->Senjata_api_m->get();
-    $this->data['content']  = 'kapolres/pemasukan_senpi';
-    $this->template($this->data,'kapolres');
+    $this->data['content']  = 'kabag_sumda/pemasukan_senpi';
+    $this->template($this->data,'kabag_sumda');
   }
 
   public function pengeluaran_senpi(){
     $this->data['title']    ='Data Pengeluaran Senjata Api';
     $this->data['senpi']    = $this->Senjata_api_m->get();
-    $this->data['content']  = 'kapolres/pengeluaran_senpi';
-    $this->template($this->data,'kapolres');
+    $this->data['content']  = 'kabag_sumda/pengeluaran_senpi';
+    $this->template($this->data,'kabag_sumda');
   }
 
   public function amunisi(){
@@ -77,7 +77,7 @@ class Kapolres extends MY_Controller
     if($cek_cetak == 'cetak'){
     
       $this->data['amunisi'] = $this->Amunisi_m->get();
-      $html = $this->load->view('kapolres/cetak_amunisi', $this->data, true);
+      $html = $this->load->view('kabag_sumda/cetak_amunisi', $this->data, true);
       $pdfFilePath = 'Laporan Data Amunisi - ' . date('Y-m-d') . '.pdf';
       $this->load->library('m_pdf');
       $this->m_pdf->pdf->WriteHTML($html);
@@ -94,22 +94,22 @@ class Kapolres extends MY_Controller
 
     $this->data['title']    ='Data Amunisi';
     $this->data['amunisi']  = $this->Amunisi_m->get();
-    $this->data['content']  = 'kapolres/amunisi';
-    $this->template($this->data,'kapolres');
+    $this->data['content']  = 'kabag_sumda/amunisi';
+    $this->template($this->data,'kabag_sumda');
   }
 
   public function pemasukan_amunisi(){
     $this->data['title']    ='Data Pemasukan Amunisi';
     $this->data['amunisi']  = $this->Amunisi_m->get();
-    $this->data['content']  = 'kapolres/pemasukan_amunisi';
-    $this->template($this->data,'kapolres');
+    $this->data['content']  = 'kabag_sumda/pemasukan_amunisi';
+    $this->template($this->data,'kabag_sumda');
   }
 
   public function pengeluaran_amunisi(){
     $this->data['title']    ='Data Pengeluaran Amunisi';
     $this->data['amunisi']  = $this->Amunisi_m->get();
-    $this->data['content']  = 'kapolres/pengeluaran_amunisi';
-    $this->template($this->data,'kapolres');
+    $this->data['content']  = 'kabag_sumda/pengeluaran_amunisi';
+    $this->template($this->data,'kabag_sumda');
   }
 
   public function berita_acara(){
@@ -119,7 +119,7 @@ class Kapolres extends MY_Controller
     if($cek_cetak == 'cetak'){
     
       $this->data['berita'] = $this->Berita_acara_m->get();
-      $html = $this->load->view('kapolres/cetak_berita_acara', $this->data, true);
+      $html = $this->load->view('kabag_sumda/cetak_berita_acara', $this->data, true);
       $pdfFilePath = 'Laporan Data Berita Acara - ' . date('Y-m-d') . '.pdf';
       $this->load->library('m_pdf');
       $this->m_pdf->pdf->WriteHTML($html);
@@ -129,14 +129,14 @@ class Kapolres extends MY_Controller
 
     $this->data['title']    ='Data Berita Acara';
     $this->data['berita']  = $this->Berita_acara_m->get();
-    $this->data['content']  = 'kapolres/berita_acara';
-    $this->template($this->data,'kapolres');
+    $this->data['content']  = 'kabag_sumda/berita_acara';
+    $this->template($this->data,'kabag_sumda');
   }
 
   public function cetak(){
     $this->data['title']    ='Data Berita Acara';
     $this->data['amunisi']  = $this->Amunisi_m->get();
-    $this->load->view('kapolres/cetak_amunisi',$this->data);
+    $this->load->view('kabag_sumda/cetak_amunisi',$this->data);
   }
 
 }

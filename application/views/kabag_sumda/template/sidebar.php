@@ -30,40 +30,40 @@
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <li>
-                            <a href="<?= base_url('kapolres') ?>"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            <a href="<?= base_url('kabag_sumda') ?>"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
                         <li>
-                            <a href="<?= base_url('kapolres/senpi') ?>"><i class="fa fa-shield fa-fw"></i> Senjata Api</a>
+                            <a href="<?= base_url('kabag_sumda/senpi') ?>"><i class="fa fa-shield fa-fw"></i> Senjata Api</a>
                             <!-- <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="<?= base_url('kapolres/senpi') ?>">Data Senjata Api</a>
+                                    <a href="<?= base_url('kabag_sumda/senpi') ?>">Data Senjata Api</a>
                                 </li>
                                 <li>
-                                    <a href="<?= base_url('kapolres/pemasukan_senpi') ?>">Pemasukan Senjata Api</a>
+                                    <a href="<?= base_url('kabag_sumda/pemasukan_senpi') ?>">Pemasukan Senjata Api</a>
                                 </li>
                                 <li>
-                                    <a href="<?= base_url('kapolres/pengeluaran_senpi') ?>">Pengeluaran Senjata Api</a>
+                                    <a href="<?= base_url('kabag_sumda/pengeluaran_senpi') ?>">Pengeluaran Senjata Api</a>
                                 </li>
                             </ul> -->
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="<?= base_url('kapolres/amunisi') ?>"><i class="fa fa-database fa-fw"></i> Amunisi</a><!-- <span class="fa arrow"></span> -->
+                            <a href="<?= base_url('kabag_sumda/amunisi') ?>"><i class="fa fa-database fa-fw"></i> Amunisi</a><!-- <span class="fa arrow"></span> -->
                             <!-- <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="<?= base_url('kapolres/amunisi') ?>">Data Amunisi</a>
+                                    <a href="<?= base_url('kabag_sumda/amunisi') ?>">Data Amunisi</a>
                                 </li>
                                 <li>
-                                    <a href="<?= base_url('kapolres/pemasukan_amunisi') ?>">Pemasukan Amunisi</a>
+                                    <a href="<?= base_url('kabag_sumda/pemasukan_amunisi') ?>">Pemasukan Amunisi</a>
                                 </li>
                                 <li>
-                                    <a href="<?= base_url('kapolres/pengeluaran_amunisi') ?>">Pengeluaran Amunisi</a>
+                                    <a href="<?= base_url('kabag_sumda/pengeluaran_amunisi') ?>">Pengeluaran Amunisi</a>
                                 </li>
                             </ul> -->
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="<?= base_url('kapolres/berita_acara') ?>"><i class="fa fa-book fa-fw"></i> Berita Acara</a>
+                            <a href="<?= base_url('kabag_sumda/berita_acara') ?>"><i class="fa fa-book fa-fw"></i> Berita Acara</a>
                         </li>
                     </ul>
                 </div>
