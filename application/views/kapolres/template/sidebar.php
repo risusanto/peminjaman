@@ -17,11 +17,6 @@
                         <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                        </li>
-                        <li class="divider"></li>
                         <li><a href="<?=base_url('logout')?>"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
@@ -38,8 +33,8 @@
                             <a href="<?= base_url('kapolres') ?>"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-shield fa-fw"></i> Senjata Api<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
+                            <a href="<?= base_url('kapolres/senpi') ?>"><i class="fa fa-shield fa-fw"></i> Senjata Api</a>
+                            <!-- <ul class="nav nav-second-level">
                                 <li>
                                     <a href="<?= base_url('kapolres/senpi') ?>">Data Senjata Api</a>
                                 </li>
@@ -49,12 +44,12 @@
                                 <li>
                                     <a href="<?= base_url('kapolres/pengeluaran_senpi') ?>">Pengeluaran Senjata Api</a>
                                 </li>
-                            </ul>
+                            </ul> -->
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-database fa-fw"></i> Amunisi<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
+                            <a href="<?= base_url('kapolres/amunisi') ?>"><i class="fa fa-database fa-fw"></i> Amunisi</a><!-- <span class="fa arrow"></span> -->
+                            <!-- <ul class="nav nav-second-level">
                                 <li>
                                     <a href="<?= base_url('kapolres/amunisi') ?>">Data Amunisi</a>
                                 </li>
@@ -64,7 +59,7 @@
                                 <li>
                                     <a href="<?= base_url('kapolres/pengeluaran_amunisi') ?>">Pengeluaran Amunisi</a>
                                 </li>
-                            </ul>
+                            </ul> -->
                             <!-- /.nav-second-level -->
                         </li>
                         <li>

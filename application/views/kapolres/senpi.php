@@ -9,7 +9,7 @@
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Data Senjata Api yang Tersedia
+                            Data Senjata Api
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
@@ -23,7 +23,8 @@
                                         <th>Jenis</th>
                                         <th>Merk</th>
                                         <th>Kaliber</th>
-                                        <th>Jumlah</th>
+                                        <th>Jumlah Tersedia</th>
+                                        <th>Jumlah Terpakai</th>
                                         <th>Kondisi</th>
                                     </tr>
                                 </thead>
@@ -35,6 +36,14 @@
                                         <td><?= $row->merk ?></td>
                                         <td><?= $row->kaliber ?></td>
                                         <td><?= $row->jumlah ?></td>
+                                        <td>
+                                            <?php if($row->no_senpi == $pemohon->no_senpi){
+                                                    echo $row->jumlah - 1;
+                                                } else {
+                                                    echo '0';
+                                                }
+                                            ?>
+                                        </td>
                                         <td><?= $row->kondisi ?></td>
                                     </tr>
                                     <?php endforeach; ?>

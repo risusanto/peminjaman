@@ -11,15 +11,15 @@
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3">
-                                    <i class="fa fa-user fa-5x"></i>
+                                    <i class="fa fa-shield fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge"></div>
-                                    <div>Laporan Konsumen</div>
+                                    <div class="huge"><?= count($senpi) ?></div>
+                                    <div>Data Senjata Api</div>
                                 </div>
                             </div>
                         </div>
-                        <a href="<?= base_url('pimpinan/laporan-konsumen') ?>">
+                        <a href="<?= base_url('kapolres/senpi') ?>">
                             <div class="panel-footer">
                                 <span class="pull-left">View Details</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -33,15 +33,15 @@
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3">
-                                    <i class="fa fa-envelope fa-5x"></i>
+                                    <i class="fa fa-database fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge"></div>
-                                    <div>Laporan Undangan</div>
+                                    <div class="huge"><?= count($amunisi) ?></div>
+                                    <div>Data Amunisi</div>
                                 </div>
                             </div>
                         </div>
-                        <a href="<?= base_url('pimpinan/laporan-undangan') ?>">
+                        <a href="<?= base_url('kapolres/amunisi') ?>">
                             <div class="panel-footer">
                                 <span class="pull-left">View Details</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -55,84 +55,15 @@
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3">
-                                    <i class="fa fa-shopping-cart fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge"></div>
-                                    <div>Laporan Penjualan</div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="<?= base_url('pimpinan/laporan-penjualan') ?>">
-                            <div class="panel-footer">
-                                <span class="pull-left">View Details</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-red">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-support fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge"></div>
-                                    <div>Laporan Bahan Baku</div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="<?= base_url('pimpinan/laporan-bahan-baku') ?>">
-                            <div class="panel-footer">
-                                <span class="pull-left">View Details</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-success">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
                                     <i class="fa fa-book fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge"></div>
-                                    <div>Buku Besar</div>
+                                    <div class="huge"><?= count($berita) ?></div>
+                                    <div>Data Berita Acara</div>
                                 </div>
                             </div>
                         </div>
-                        <a href="<?= base_url('pimpinan/buku-besar') ?>">
-                            <div class="panel-footer">
-                                <span class="pull-left">View Details</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-warning">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-archive fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge"></div>
-                                    <div>Jurnal Umum</div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="<?= base_url('pimpinan/jurnal-umum') ?>">
+                        <a href="<?= base_url('kapolres/berita') ?>">
                             <div class="panel-footer">
                                 <span class="pull-left">View Details</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>

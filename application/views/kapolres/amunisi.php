@@ -9,7 +9,7 @@
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Data Amunisi yang Tersedia
+                            Data Amunisi
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
@@ -23,18 +23,29 @@
                                         <th>Kesatuan</th>
                                         <th>Merk</th>
                                         <th>Kaliber</th>
-                                        <th>Jumlah</th>
+                                        <th>Jumlah Tersedia</th>
+                                        <th>Jumlah Terpakai</th>
                                         <th>Kondisi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php foreach($amunisi as $row): ?>
                                     <tr>
-                                        <td><?= $row->no_senpi ?></td>
-                                        <td><?= $row->jenis ?></td>
+                                        <td><?= $row->no_amunisi ?></td>
+                                        <td><?= $row->kesatuan ?></td>
                                         <td><?= $row->merk ?></td>
-                                        <td><?= $row->kaliber ?></td>
+                                        <td><?= $row->caliber ?></td>
                                         <td><?= $row->jumlah ?></td>
+                                        <td>
+                                            <?php  
+                                                if(isset($pemohon->jumlah_amunisi)){
+                                                    $amunisi = $row->jumlah - $pemohon->jumlah_amunisi;
+                                                    echo $amunisi;
+                                                } else {
+                                                    echo '0';
+                                                }
+                                            ?>
+                                        </td>
                                         <td><?= $row->kondisi ?></td>
                                     </tr>
                                     <?php endforeach; ?>
