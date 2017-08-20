@@ -1,6 +1,10 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">Data Pemohon</h1>
+                    <?php  
+                        $msg = $this->session->flashdata('msg');
+                        if (isset($msg)) echo $msg;
+                    ?>
                     <a data-toggle="modal" data-target="#add" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Tambah</a>
                 </div>
                 <!-- /.col-lg-12 -->
@@ -98,35 +102,43 @@
                         <div class="modal-body">
                           <div class="form-group">
                             <label>NRP</label>
-                            <input class="form-control" type="text" name="nrp" id="edit_nrp">
+                            <input class="form-control" type="text" name="nrp">
                           </div>
                           <div class="form-group">
                             <label>Nama Anggota</label>
-                            <input class="form-control" type="text" name="nama_anggota" id="edit_nama_anggota">
+                            <input class="form-control" type="text" name="nama_anggota">
                           </div>
                           <div class="form-group">
                             <label>Pangkat</label>
-                            <input class="form-control" type="text" name="pangkat" id="edit_pangkat">
+                            <input class="form-control" type="text" name="pangkat">
                           </div>
                           <div class="form-group">
                             <label>Jabatan</label>
-                            <input class="form-control" type="text" name="jabatan" id="edit_jabatan">
+                            <input class="form-control" type="text" name="jabatan">
                           </div>
                           <div class="form-group">
                             <label>Kesatuan</label>
-                            <input class="form-control" type="text" name="kesatuan" id="edit_kesatuan">
+                            <input class="form-control" type="text" name="kesatuan">
                           </div>
                           <div class="form-group">
                             <label>Kelengkapan</label>
-                            <input class="form-control" type="text" name="kelengkapan" id="edit_kelengkapan">
+                            <input class="form-control" type="text" name="kelengkapan">
                           </div>
                           <div class="form-group">
                             <label>Nomor Senjata Api</label>
-                            <input class="form-control" type="text" name="no_senpi" id="edit_no_senpi">
+                            <select class="form-control" name="no_senpi">
+                                <?php if (count($senpi) > 0): ?>
+                                    <?php foreach ($senpi as $row): ?>
+                                        <option value="<?= $row->no_senpi ?>"><?= $row->no_senpi ?></option>
+                                    <?php endforeach; ?>
+                                <?php else: ?>
+                                    <option>Senjata api tidak tersedia</option>
+                                <?php endif; ?>
+                            </select>
                           </div>
                           <div class="form-group">
                             <label>Jumlah Amunisi</label>
-                            <input class="form-control" type="number" name="jumlah_amunisi" id="edit_jumlah_amunisi">
+                            <input class="form-control" type="number" name="jumlah_amunisi">
                           </div>
                         </div>
                         <div class="modal-footer">
