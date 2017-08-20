@@ -18,12 +18,46 @@ class Admin extends MY_Controller
             redirect('login');
             exit;
         }
+
+      $this->load->model('Pemohon_m');
   }
 
   public function index()
   {
-    $this->data['title']    = 'DASHBOARD ADMIN';
+    $this->data['title']    = 'Dashboard Admin';
+    $this->data['pemohon']  = $this->Pemohon_m->get();
     $this->data['content']  = 'admin/dashboard';
+    $this->template($this->data);
+  }
+
+  public function pemohon()
+  {
+    $nrp = $this->POST('nrp');
+    if(isset($nrp)){
+        $cek_pemohon = $this->Pemohon_m->get_row(['nrp' => $nrp]);
+
+        if ($cek_pemohon->status == '1')
+        {
+          $this->Pemohon_m->update($nrp, ['status' => '0']);
+          echo '<button class="btn btn-danger" onclick="changeStatus('.$nrp.')"><i class="fa fa-close"></i> Tidak</button>';
+        }
+        else
+        {
+          $this->Pemohon_m->update($nrp, ['status' => '1']);
+          echo '<button class="btn btn-success" onclick="changeStatus('.$nrp.')"><i class="fa fa-check"></i> Iya</button>'; 
+        }
+    }
+
+    if ($this->POST('delete')) {
+      $this->Pemohon_m->delete($this->POST('nrp'));
+    }
+
+    
+
+
+    $this->data['title']    = 'Data Pemohon Senjata Api';
+    $this->data['pemohon']  = $this->Pemohon_m->get();
+    $this->data['content']  = 'admin/pemohon';
     $this->template($this->data);
   }
 }
