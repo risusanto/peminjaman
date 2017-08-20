@@ -48,7 +48,7 @@
                                         <td><?= $row->no_senpi ?></td>
                                         <td><?= $row->jumlah_amunisi ?></td>
                                         <td>
-                                            <div id="btn">
+                                            <div id="btn-<?= $row->nrp ?>">
                                                 <?php if ($row->status == '1'): ?>
                                                     <button onclick="changeStatus(<?= $row->nrp ?>)" class="btn btn-success"><i class="fa fa-check"></i> Iya</button>
                                                 <?php else: ?>
@@ -67,7 +67,7 @@
                                                         <li><a href="<?= base_url('admin/detail_pemohon') ?>">Detail</a>
                                                         </li>
                                                         <li class="divider"></li>
-                                                        <li><a href="" data-toggle="modal" data-target="#edit">Edit</a>
+                                                        <li><a href="" data-toggle="modal" data-target="#edit" onclick="edit_pemohon(<?= $row->nrp ?>);">Edit</a>
                                                         </li>
                                                         <li><a href="#" onclick="delete_pemohon(<?= $row->nrp ?>)">Hapus</a>
                                                         </li>
@@ -166,6 +166,7 @@
                           <div class="form-group">
                             <label>NRP</label>
                             <input class="form-control" type="text" name="nrp" id="edit_nrp">
+                            <input type="hidden" name="old_nrp" id="old_nrp">
                           </div>
                           <div class="form-group">
                             <label>Nama Anggota</label>
@@ -189,7 +190,7 @@
                           </div>
                           <div class="form-group">
                             <label>Nomor Senjata Api</label>
-                            <input class="form-control" type="text" name="no_senpi" id="edit_no_senpi">
+                            <div id="edit_no_senpi"></div>
                           </div>
                           <div class="form-group">
                             <label>Jumlah Amunisi</label>
@@ -220,11 +221,12 @@
                         url: '<?= base_url('admin/pemohon') ?>',
                         type: 'POST',
                         data: {
+                            change: true,
                             nrp: nrp
                         },
                         success: function(response) {
-                            // $('#btn').html(response);
-                            window.location = '<?= base_url('admin/pemohon') ?>';
+                            $('#btn-' + nrp).html(response);
+                            // window.location = '<?= base_url('admin/pemohon') ?>';
                         },
                         error: function (e) {
                             console.log(e.responseText);
@@ -243,6 +245,22 @@
                         success: function() {
                             window.location = "<?= base_url('admin/pemohon') ?>";
                         }
+                    });
+                }
+
+                function edit_pemohon(nrp) {
+                    $.get('<?= base_url('admin/pemohon?nrp=') ?>' + nrp, function(response) {
+                        console.log('<?= base_url('admin/pemohon?nrp=') ?>' + nrp);
+                        var json = JSON.parse(response);
+                        $('#old_nrp').val(json.nrp);
+                        $('#edit_nrp').val(json.nrp);
+                        $('#edit_nama_anggota').val(json.nama_anggota);
+                        $('#edit_pangkat').val(json.pangkat);
+                        $('#edit_jabatan').val(json.jabatan);
+                        $('#edit_kesatuan').val(json.kesatuan);
+                        $('#edit_kelengkapan').val(json.kelengkapan);
+                        $('#edit_no_senpi').html(json.dropdown);
+                        $('#edit_jumlah_amunisi').val(json.jumlah_amunisi);
                     });
                 }
 

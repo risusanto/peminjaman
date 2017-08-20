@@ -50,6 +50,12 @@
                         <li>
                             <a href="<?= base_url('admin/pemohon') ?>"><i class="fa fa-user fa-fw"></i> Pemohon</a>
                         </li>
+                        <li>
+                            <a href="<?= base_url('admin/senpi') ?>"><i class="fa fa-plug fa-fw"></i> Senjata Api</a>
+                        </li>
+                        <li>
+                            <a href="<?= base_url('admin/stok-amunisi') ?>"><i class="fa fa-rocket fa-fw"></i> Amunisi</a>
+                        </li>
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->

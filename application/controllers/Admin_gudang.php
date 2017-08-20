@@ -6,7 +6,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Admin_gudang extends MY_Controller
 {
 
-  function __construct()
+  public function __construct()
   {
     parent::__construct();
     $this->data['id_role'] = $this->session->userdata('id_role');
