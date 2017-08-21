@@ -56,6 +56,9 @@
                         <li>
                             <a href="<?= base_url('admin/stok-amunisi') ?>"><i class="fa fa-rocket fa-fw"></i> Amunisi</a>
                         </li>
+                        <li>
+                            <a href="<?= base_url('admin/paur-log') ?>"><i class="fa fa-list-alt fa-fw"></i> Berita Acara</a>
+                        </li>
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->

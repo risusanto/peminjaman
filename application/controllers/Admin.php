@@ -26,11 +26,13 @@ class Admin extends MY_Controller
     {
         $this->load->model('senjata_api_m');
         $this->load->model('amunisi_m');
-        $this->data['title']    = 'Dashboard Admin';
-        $this->data['pemohon']  = $this->Pemohon_m->get();
-        $this->data['amunisi']  = $this->amunisi_m->get();
-        $this->data['senpi']    = $this->senjata_api_m->get();
-        $this->data['content']  = 'admin/dashboard';
+        $this->load->model('berita_acara_m');
+        $this->data['title']        = 'Dashboard Admin';
+        $this->data['pemohon']      = $this->Pemohon_m->get();
+        $this->data['amunisi']      = $this->amunisi_m->get();
+        $this->data['berita_acara'] = $this->berita_acara_m->get();
+        $this->data['senpi']        = $this->senjata_api_m->get();
+        $this->data['content']      = 'admin/dashboard';
         $this->template($this->data);
     }
 
@@ -134,6 +136,77 @@ class Admin extends MY_Controller
         $this->data['title']    = 'Stok Amunisi';
         $this->data['amunisi']  = $this->amunisi_m->get();
         $this->data['content']  = 'admin/amunisi';
+        $this->template($this->data);
+    }
+
+    public function paur_log()
+    {
+        $this->load->model('berita_acara_m');
+        $this->load->model('pemohon_m');
+        $this->load->model('senjata_api_m');
+        $this->load->model('amunisi_m');
+
+        if ($this->POST('no_ba') && $this->POST('delete'))
+        {
+            $this->berita_acara_m->delete($this->POST('no_ba'));
+        }
+
+        if ($this->POST('add'))
+        {
+            $this->data['berita_acara'] = [
+                'no_ba'     => $this->POST('no_ba'),
+                'nrp'       => $this->POST('nrp'),
+                'no_senpi'  => $this->POST('no_senpi'),
+                'no_amunisi'=> $this->POST('no_amunisi')
+            ];
+            $this->berita_acara_m->insert($this->data['berita_acara']);
+            $this->flashmsg('<i class="glyphicon glyphicon-success"></i> Data berita acara berhasil ditambah');
+            redirect('admin/paur-log');
+            exit;
+        }
+
+        if ($this->POST('edit') && $this->POST('old_no_ba'))
+        {
+            $this->data['berita_acara'] = [
+                'no_ba'     => $this->POST('no_ba'),
+                'nrp'       => $this->POST('nrp'),
+                'no_senpi'  => $this->POST('no_senpi'),
+                'no_amunisi'=> $this->POST('no_amunisi')
+            ];
+            $this->berita_acara_m->update($this->POST('old_no_ba'), $this->data['berita_acara']);
+            $this->flashmsg('<i class="glyphicon glyphicon-success"></i> Data berita acara berhasil di-edit');
+            redirect('admin/paur-log');
+            exit;
+        }
+
+        if ($this->input->get('no_ba'))
+        {
+            $this->data['berita_acara'] = $this->berita_acara_m->get_row(['no_ba' => $this->input->get('no_ba')]);
+            $no_senpi = [];
+            $this->data['senpi']    = $this->senjata_api_m->get();
+            foreach ($this->data['senpi'] as $senpi)
+                $no_senpi[$senpi->no_senpi] = $senpi->no_senpi;
+            $this->data['berita_acara']->dropdown_senpi = form_dropdown('no_senpi', $no_senpi, $this->data['berita_acara']->no_senpi, ['class' => 'form-control']);
+            $nrp = [];
+            $this->data['pemohon']    = $this->pemohon_m->get();
+            foreach ($this->data['pemohon'] as $pemohon)
+                $nrp[$pemohon->nrp] = $pemohon->nrp;
+            $this->data['berita_acara']->dropdown_nrp = form_dropdown('nrp', $nrp, $this->data['berita_acara']->nrp, ['class' => 'form-control']);
+            $no_amunisi = [];
+            $this->data['amunisi']    = $this->amunisi_m->get();
+            foreach ($this->data['amunisi'] as $amunisi)
+                $no_amunisi[$amunisi->no_amunisi] = $amunisi->no_amunisi;
+            $this->data['berita_acara']->dropdown_amunisi = form_dropdown('no_amunisi', $no_amunisi, $this->data['berita_acara']->no_amunisi, ['class' => 'form-control']);
+            echo json_encode($this->data['berita_acara']);
+            exit;
+        }
+
+        $this->data['pemohon']          = $this->pemohon_m->get();
+        $this->data['senpi']            = $this->senjata_api_m->get();
+        $this->data['amunisi']          = $this->amunisi_m->get();
+        $this->data['title']            = 'Berita Acara';
+        $this->data['berita_acara']     = $this->berita_acara_m->get();
+        $this->data['content']          = 'admin/berita_acara';
         $this->template($this->data);
     }
 }
