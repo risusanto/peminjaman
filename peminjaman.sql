@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.6
+-- version 4.7.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Aug 10, 2017 at 01:56 AM
--- Server version: 5.7.17-log
--- PHP Version: 7.0.17
+-- Host: 127.0.0.1
+-- Generation Time: Aug 20, 2017 at 06:59 PM
+-- Server version: 10.1.25-MariaDB
+-- PHP Version: 5.6.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -62,8 +64,16 @@ CREATE TABLE `pemohon` (
   `kesatuan` varchar(20) DEFAULT NULL,
   `kelengkapan` varchar(255) DEFAULT NULL,
   `jumlah_amunisi` int(10) DEFAULT NULL,
-  `no_senpi` int(20) DEFAULT NULL
+  `no_senpi` int(20) DEFAULT NULL,
+  `status` enum('1','0') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `pemohon`
+--
+
+INSERT INTO `pemohon` (`nrp`, `nama_anggota`, `pangkat`, `jabatan`, `kesatuan`, `kelengkapan`, `jumlah_amunisi`, `no_senpi`, `status`) VALUES
+(111, 'aa', 'aaa', 'aaa', 'aa', 'aa', 111, 12, '0');
 
 -- --------------------------------------------------------
 
@@ -75,6 +85,14 @@ CREATE TABLE `role` (
   `id_role` tinyint(4) NOT NULL,
   `role` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `role`
+--
+
+INSERT INTO `role` (`id_role`, `role`) VALUES
+(1, 'admin'),
+(2, 'kabag_sumda');
 
 -- --------------------------------------------------------
 
@@ -91,6 +109,13 @@ CREATE TABLE `senjata_api` (
   `kondisi` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `senjata_api`
+--
+
+INSERT INTO `senjata_api` (`no_senpi`, `jenis`, `merk`, `kaliber`, `jumlah`, `kondisi`) VALUES
+(12, 'aa', 'aaa', 'aaa', 10000, 'aa');
+
 -- --------------------------------------------------------
 
 --
@@ -102,6 +127,14 @@ CREATE TABLE `user` (
   `password` varchar(64) DEFAULT NULL,
   `id_role` tinyint(4) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`username`, `password`, `id_role`) VALUES
+('ayu', 'a4f95a239896cd1fada61069976b9dda', 2),
+('lestari', 'a4f95a239896cd1fada61069976b9dda', 1);
 
 --
 -- Indexes for dumped tables
@@ -166,17 +199,17 @@ ALTER TABLE `berita_acara`
 -- AUTO_INCREMENT for table `pemohon`
 --
 ALTER TABLE `pemohon`
-  MODIFY `nrp` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `nrp` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12346;
 --
 -- AUTO_INCREMENT for table `role`
 --
 ALTER TABLE `role`
-  MODIFY `id_role` tinyint(4) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_role` tinyint(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `senjata_api`
 --
 ALTER TABLE `senjata_api`
-  MODIFY `no_senpi` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `no_senpi` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- Constraints for dumped tables
 --
@@ -200,6 +233,7 @@ ALTER TABLE `pemohon`
 --
 ALTER TABLE `user`
   ADD CONSTRAINT `fk_role` FOREIGN KEY (`id_role`) REFERENCES `role` (`id_role`) ON DELETE CASCADE ON UPDATE CASCADE;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -8,10 +8,10 @@ class Login extends MY_Controller
 
 	private $data = [];
 
-  function __construct()
-  {
-    parent::__construct();
-    $username = $this->session->userdata('username');
+	public function __construct()
+	{
+		parent::__construct();
+		$username = $this->session->userdata('username');
 		if (isset($username))
 		{
 			$this->data['id_role'] = $this->session->userdata('id_role');
@@ -21,7 +21,7 @@ class Login extends MY_Controller
 					redirect('admin');
 					break;
 				case 2:
-					redirect('kapolres');
+					redirect('kabag_sumda');
 					break;
 				case 3:
 					redirect('admin-gudang');
@@ -30,30 +30,34 @@ class Login extends MY_Controller
 
 			exit;
 		}
-    $this->load->model('User_m');
-  }
+		$this->load->model('User_m');
+	}
 
-  public function index()
-  {
-    if ($this->POST('login-submit'))
+	public function index()
+	{
+		if ($this->POST('login-submit'))
 		{
-      if (!$this->User_m->required_input(['username','password'])) {
-        $this->flashmsg('Data harus lengkap','warning');
-        redirect('login');
-      }
+			if (!$this->User_m->required_input(['username','password'])) 
+			{
+				$this->flashmsg('Data harus lengkap','warning');
+				redirect('login');
+				exit;
+			}
+			
 			$this->data = [
-				'username'	=> $this->POST('username'),
-				'password'	=> md5($this->POST('password'))
+			'username'	=> $this->POST('username'),
+			'password'	=> md5($this->POST('password'))
 			];
 
 			$result = $this->User_m->login($this->data);
-      if (!isset($result)) {
-        $this->flashmsg('Username atau password salah','danger');
-      }
+			if (!isset($result)) 
+			{
+				$this->flashmsg('Username atau password salah','danger');
+			}
 			redirect('login');
 			exit;
 		}
-    $this->data['title'] = 'LOGIN'.$this->title;
-    $this->load->view('login',$this->data);
-  }
+		$this->data['title'] = 'LOGIN'.$this->title;
+		$this->load->view('login',$this->data);
+	}
 }
