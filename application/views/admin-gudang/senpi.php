@@ -88,9 +88,12 @@
                                           </div>
                                           <div class="form-group">
                                             <label>Kondisi</label>
-                                            <input class="form-control" type="text" name="kondisi" required="true">
-                                            <p class="help-block">Contoh: Baik, Kurang Baik.</p>
-                                          </div>
+                                            <select class="form-control" name="kondisi">
+                                                <option>Baik</option>
+                                                <option>Kurang Baik</option>
+                                                <option>Rusak</option>
+                                            </select>
+                                        </div>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>

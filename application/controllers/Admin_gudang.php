@@ -38,7 +38,7 @@ class Admin_gudang extends MY_Controller
         redirect('admin-gudang/senpi');
         exit;
       }
-      for ($i=0; $i < 3 ; $i++) {
+      for ($i=0; $i < 4 ; $i++) {
         $data_check[$required[$i]] = $this->POST($required[$i]);
       }
       $senpi = $this->Senjata_api_m->get_row($data_check);
