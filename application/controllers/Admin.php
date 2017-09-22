@@ -52,7 +52,7 @@ class Admin extends MY_Controller
             else
             {
                 $this->Pemohon_m->update($nrp, ['status' => '1']);
-                echo '<button class="btn btn-success" onclick="changeStatus('.$nrp.')"><i class="fa fa-check"></i> Iya</button>'; 
+                echo '<button class="btn btn-success" onclick="changeStatus('.$nrp.')"><i class="fa fa-check"></i> Iya</button>';
                 exit;
             }
         }
@@ -107,7 +107,7 @@ class Admin extends MY_Controller
             exit;
         }
 
-        if ($this->POST('delete')) 
+        if ($this->POST('delete'))
         {
             $this->Pemohon_m->delete($this->POST('nrp'));
         }
@@ -208,5 +208,10 @@ class Admin extends MY_Controller
         $this->data['berita_acara']     = $this->berita_acara_m->get();
         $this->data['content']          = 'admin/berita_acara';
         $this->template($this->data);
+    }
+
+    public function cetak_berita_acara()
+    {
+      $this->load->view('laporan/berita-acara');
     }
 }
