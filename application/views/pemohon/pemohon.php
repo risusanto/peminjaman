@@ -1,6 +1,6 @@
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Data Berita Acara</h1>
+                    <h1 class="page-header">Data Pemohon</h1>
                     <?php  
                         $msg = $this->session->flashdata('msg');
                         if (isset($msg)) echo $msg;
@@ -14,7 +14,7 @@
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Berita Acara / Paur Log
+                            Data Pemohon Senjata Api
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
@@ -24,20 +24,21 @@
                             <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
                                 <thead>
                                     <tr>
-                                        <th>No. Berita Acara</th>
-                                        <th>NRP</th>
-                                        <th>No. Senjata Api</th>
-                                        <th>No. Amunisi</th>
+                                        <th>#</th>
+                                        <th>Kelengkapan</th>
+                                        <th>Nomor Senjata Api</th>
+                                        <th>Jumlah Amunisi</th>
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach($berita_acara as $row): ?>
+                                    <?php $i=0;foreach($pemohon as $row): ?>
                                     <tr>
-                                        <td><?= $row->no_ba ?></td>
-                                        <td><?= $this->Pemohon_m->get_row(['id_pemohon'=>$row->id_pemohon])->nrp ?></td>
+                                        <td><?= ++$i ?></td>
+                                        <td><?= $row->kelengkapan ?></td>
                                         <td><?= $row->no_senpi ?></td>
-                                        <td><?= $row->no_amunisi ?></td>
+                                        <td><?= $row->jumlah_amunisi ?></td>
+                                        
                                         <td>
                                             <div class="pull-right">
                                                 <div class="btn-group">
@@ -46,9 +47,9 @@
                                                         <span class="caret"></span>
                                                     </button>
                                                     <ul class="dropdown-menu pull-right" role="menu">
-                                                        <li><a href="" data-toggle="modal" data-target="#edit" onclick="edit_berita_acara(<?= $row->no_ba ?>);">Edit</a>
+                                                        <li><a href="" data-toggle="modal" data-target="#edit" onclick="edit_pemohon(<?= $row->id_pemohon ?>);">Edit</a>
                                                         </li>
-                                                        <li><a href="#" onclick="delete_berita_acara(<?= $row->no_ba ?>)">Hapus</a>
+                                                        <li><a href="#" onclick="delete_pemohon(<?= $row->id_pemohon ?>)">Hapus</a>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -75,55 +76,30 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title" id="myModalLabel">Tambah Data Berita Acara</h4>
+                            <h4 class="modal-title" id="myModalLabel">Tambah Data Pemohon</h4>
                         </div>
-                      <?=form_open('admin/paur-log')?>
+                      <?=form_open('pemohon/pemohon')?>
                         <div class="modal-body">
+                          
                           <div class="form-group">
-                            <label>No. Berita Acara</label>
-                            <input class="form-control" type="text" name="no_ba">
+                            <label>Kelengkapan</label>
+                            <input class="form-control" type="text" name="kelengkapan">
                           </div>
                           <div class="form-group">
-                            <label>Id Pemohon</label>
-                            <select class="form-control" name="id_pemohon">
-                                <?php  
-                                    if (!isset($pemohon))
-                                    {
-                                        echo '<option>Data pemohon tidak tersedia</option>';
-                                    }
-                                ?>
-                                <?php foreach ($pemohon as $row): ?>
-                                    <option value="<?= $row->id_pemohon ?>"><?= $row->id_pemohon ?></option>
-                                <?php endforeach; ?>
-                            </select>
-                          </div>
-                          <div class="form-group">
-                            <label>No. Senjata Api</label>
+                            <label>Nomor Senjata Api</label>
                             <select class="form-control" name="no_senpi">
-                                <?php  
-                                    if (!isset($senpi))
-                                    {
-                                        echo '<option>Data senjata api tidak tersedia</option>';
-                                    }
-                                ?>
-                                <?php foreach ($senpi as $row): ?>
-                                    <option value="<?= $row->no_senpi ?>"><?= $row->no_senpi ?></option>
-                                <?php endforeach; ?>
+                                <?php if (count($senpi) > 0): ?>
+                                    <?php foreach ($senpi as $row): ?>
+                                        <option value="<?= $row->no_senpi ?>"><?= $row->no_senpi ?></option>
+                                    <?php endforeach; ?>
+                                <?php else: ?>
+                                    <option>Senjata api tidak tersedia</option>
+                                <?php endif; ?>
                             </select>
                           </div>
                           <div class="form-group">
-                            <label>No. Amunisi</label>
-                            <select class="form-control" name="no_amunisi">
-                                <?php  
-                                    if (!isset($amunisi))
-                                    {
-                                        echo '<option>Data amunisi tidak tersedia</option>';
-                                    }
-                                ?>
-                                <?php foreach ($amunisi as $row): ?>
-                                    <option value="<?= $row->no_amunisi ?>"><?= $row->no_amunisi ?></option>
-                                <?php endforeach; ?>
-                            </select>
+                            <label>Jumlah Amunisi</label>
+                            <input class="form-control" type="number" name="jumlah_amunisi">
                           </div>
                         </div>
                         <div class="modal-footer">
@@ -144,26 +120,22 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title" id="myModalLabel">Edit Data Pemohon</h4>
+                            <h4 class="modal-title" id="myModalLabel">Edit Data Permohonan</h4>
                         </div>
-                      <?=form_open('admin/paur-log')?>
+                      <?=form_open('pemohon/pemohon')?>
                         <div class="modal-body">
                           <div class="form-group">
-                            <label>No. Berita Acara</label>
-                            <input class="form-control" type="text" id="edit_no_ba" name="no_ba">
-                            <input type="hidden" name="old_no_ba" id="old_no_ba">
+                            <label>Kelengkapan</label>
+                            <input class="form-control" type="text" name="kelengkapan" id="edit_kelengkapan">
+                            <input class="form-control" type="hidden" name="id_pemohon" id="edit_id_pemohon">
                           </div>
                           <div class="form-group">
-                            <label>NRP</label>
-                            <div id="edit_nrp"></div>
-                          </div>
-                          <div class="form-group">
-                            <label>No. Senjata Api</label>
+                            <label>Nomor Senjata Api</label>
                             <div id="edit_no_senpi"></div>
                           </div>
                           <div class="form-group">
-                            <label>No. Amunisi</label>
-                            <div id="edit_no_amunisi"></div>
+                            <label>Jumlah Amunisi</label>
+                            <input class="form-control" type="number" name="jumlah_amunisi" id="edit_jumlah_amunisi">
                           </div>
                         </div>
                         <div class="modal-footer">
@@ -185,28 +157,52 @@
                     });
                 });
 
-                function delete_berita_acara(no_ba) {
+                function changeStatus(nrp) {
                     $.ajax({
-                        url: "<?= base_url('admin/paur-log') ?>",
+                        url: '<?= base_url('pemohon/pemohon') ?>',
                         type: 'POST',
                         data: {
-                            no_ba: no_ba,
-                            delete: true
+                            change: true,
+                            nrp: nrp
                         },
-                        success: function() {
-                            window.location = "<?= base_url('admin/paur-log') ?>";
+                        success: function(response) {
+                            $('#btn-' + nrp).html(response);
+                            // window.location = '<?= base_url('pemohon/pemohon') ?>';
+                        },
+                        error: function (e) {
+                            console.log(e.responseText);
                         }
                     });
                 }
 
-                function edit_berita_acara(no_ba) {
-                    $.get('<?= base_url('admin/paur-log?no_ba=') ?>' + no_ba, function(response) {
+                function delete_pemohon(nrp) {
+                    $.ajax({
+                        url: "<?= base_url('pemohon/pemohon') ?>",
+                        type: 'POST',
+                        data: {
+                            id_pemohon: nrp,
+                            delete: true
+                        },
+                        success: function() {
+                            window.location = "<?= base_url('pemohon/pemohon') ?>";
+                        }
+                    });
+                }
+
+                function edit_pemohon(nrp) {
+                    $.get('<?= base_url('pemohon/pemohon?nrp=') ?>' + nrp, function(response) {
+                        console.log('<?= base_url('pemohon/pemohon?nrp=') ?>' + nrp);
                         var json = JSON.parse(response);
-                        $('#old_no_ba').val(json.no_ba);
-                        $('#edit_no_ba').val(json.no_ba);
-                        $('#edit_nrp').html(json.dropdown_nrp);
-                        $('#edit_no_senpi').html(json.dropdown_senpi);
-                        $('#edit_no_amunisi').html(json.dropdown_amunisi);
+                        $('#old_nrp').val(json.nrp);
+                        $('#edit_nrp').val(json.nrp);
+                        $('#edit_id_pemohon').val(json.id_pemohon);
+                        $('#edit_nama_anggota').val(json.nama_anggota);
+                        $('#edit_pangkat').val(json.pangkat);
+                        $('#edit_jabatan').val(json.jabatan);
+                        $('#edit_kesatuan').val(json.kesatuan);
+                        $('#edit_kelengkapan').val(json.kelengkapan);
+                        $('#edit_no_senpi').html(json.dropdown);
+                        $('#edit_jumlah_amunisi').val(json.jumlah_amunisi);
                     });
                 }
 

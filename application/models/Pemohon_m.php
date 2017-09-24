@@ -7,6 +7,6 @@ class Pemohon_m extends MY_Model
 		parent::__construct();
 
 		$this->data['table_name']	= 'pemohon';
-		$this->data['primary_key']	= 'nrp';
+		$this->data['primary_key']	= 'id_pemohon';
 	}
 }

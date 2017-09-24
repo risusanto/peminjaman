@@ -39,33 +39,44 @@
             <div class="col-md-4 col-md-offset-4">
                 <div class="login-panel panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Please Sign In</h3>
+                        <h3 class="panel-title">Register Pemohon</h3>
                     </div>
                     <div class="panel-body">
-                        <?=form_open('login')?>
+                        <?=form_open('register')?>
                             <fieldset>
                               <?= $this->session->flashdata('msg') ?>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="Username" name="username" type="text" autofocus>
+                                    <label for="">NRP : </label>
+                                    <input class="form-control"  name="nrp" type="text" autofocus required>
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="Password" name="password" type="password" value="">
+                                    <label for="">Nama : </label>
+                                    <input class="form-control"  name="nama" type="text" autofocus>
                                 </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input name="remember" type="checkbox" value="Remember Me">Remember Me
-                                    </label>
+                                <div class="form-group">
+                                    <label for="">Jabatan : </label>
+                                    <input class="form-control"  name="jabatan" type="text" autofocus>
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Pangkat : </label>
+                                    <input class="form-control"  name="pangkat" type="text" autofocus>
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Kesatuan : </label>
+                                    <input class="form-control"  name="kesatuan" type="text" autofocus>
+                                </div>
+                                <hr>
+                                <div class="form-group">
+                                    <label for="">Password : </label>
+                                    <input class="form-control"  name="password" type="password" autofocus>
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Ulangi Password : </label>
+                                    <input class="form-control"  name="repassword" type="password" autofocus>
                                 </div>
                                 <!-- Change this to a button or input when using this as a form -->
                                 <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <input type="submit" class="btn btn-lg btn-success btn-block" name="login-submit" value="Masuk">
-                                        </div>
-                                        <div class="col-md-6">
-                                            <a href="<?=base_url('register') ?>" class="btn btn-lg btn-primary btn-block" > Register </a>
-                                        </div>
-                                    </div>
+                                    <input type="submit" class="btn btn-lg btn-primary btn-block" name="daftar" value="Daftar">
                                 </div>
                                 
                             </fieldset>

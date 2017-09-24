@@ -5,7 +5,7 @@
                         $msg = $this->session->flashdata('msg');
                         if (isset($msg)) echo $msg;
                     ?>
-                    <a data-toggle="modal" data-target="#add" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Tambah</a>
+                    <!-- <a data-toggle="modal" data-target="#add" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Tambah</a> -->
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -24,11 +24,8 @@
                             <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
                                 <thead>
                                     <tr>
-                                        <th>NRP</th>
+                                        <th>#</th>
                                         <th>Nama Anggota</th>
-                                        <th>Pangkat</th>
-                                        <th>Jabatan</th>
-                                        <th>Kesatuan</th>
                                         <th>Kelengkapan</th>
                                         <th>Nomor Senjata Api</th>
                                         <th>Jumlah Amunisi</th>
@@ -37,22 +34,19 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach($pemohon as $row): ?>
+                                    <?php $i=0; foreach($pemohon as $row): ?>
                                     <tr>
-                                        <td><?= $row->nrp ?></td>
-                                        <td><?= $row->nama_anggota ?></td>
-                                        <td><?= $row->pangkat ?></td>
-                                        <td><?= $row->jabatan ?></td>
-                                        <td><?= $row->kesatuan ?></td>
+                                        <td><?= ++$i ?></td>
+                                        <td><?= $this->Data_pemohon_m->get_row(['nrp' => $row->nrp])->nama ?></td>
                                         <td><?= $row->kelengkapan ?></td>
                                         <td><?= $row->no_senpi ?></td>
                                         <td><?= $row->jumlah_amunisi ?></td>
                                         <td>
                                             <div id="btn-<?= $row->nrp ?>">
                                                 <?php if ($row->status == '1'): ?>
-                                                    <button onclick="changeStatus(<?= $row->nrp ?>)" class="btn btn-success"><i class="fa fa-check"></i> Iya</button>
+                                                    <button onclick="changeStatus(<?= $row->id_pemohon ?>)" class="btn btn-success"><i class="fa fa-check"></i> Iya</button>
                                                 <?php else: ?>
-                                                    <button onclick="changeStatus(<?= $row->nrp ?>)" class="btn btn-danger"><i class="fa fa-close"></i> Tidak</button>
+                                                    <button onclick="changeStatus(<?= $row->id_pemohon ?>)" class="btn btn-danger"><i class="fa fa-close"></i> Tidak</button>
                                                 <?php endif; ?>
                                             </div>
                                         </td>
@@ -67,9 +61,9 @@
                                                         <li><a href="<?= base_url('admin/detail_pemohon') ?>">Detail</a>
                                                         </li>
                                                         <li class="divider"></li>
-                                                        <li><a href="" data-toggle="modal" data-target="#edit" onclick="edit_pemohon(<?= $row->nrp ?>);">Edit</a>
+                                                        <li><a href="" data-toggle="modal" data-target="#edit" onclick="edit_pemohon(<?= $row->id_pemohon ?>);">Edit</a>
                                                         </li>
-                                                        <li><a href="#" onclick="delete_pemohon(<?= $row->nrp ?>)">Hapus</a>
+                                                        <li><a href="#" onclick="delete_pemohon(<?= $row->id_pemohon ?>)">Hapus</a>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -163,30 +157,12 @@
                         </div>
                       <?=form_open('admin/pemohon')?>
                         <div class="modal-body">
-                          <div class="form-group">
-                            <label>NRP</label>
-                            <input class="form-control" type="text" name="nrp" id="edit_nrp">
-                            <input type="hidden" name="old_nrp" id="old_nrp">
-                          </div>
-                          <div class="form-group">
-                            <label>Nama Anggota</label>
-                            <input class="form-control" type="text" name="nama_anggota" id="edit_nama_anggota">
-                          </div>
-                          <div class="form-group">
-                            <label>Pangkat</label>
-                            <input class="form-control" type="text" name="pangkat" id="edit_pangkat">
-                          </div>
-                          <div class="form-group">
-                            <label>Jabatan</label>
-                            <input class="form-control" type="text" name="jabatan" id="edit_jabatan">
-                          </div>
-                          <div class="form-group">
-                            <label>Kesatuan</label>
-                            <input class="form-control" type="text" name="kesatuan" id="edit_kesatuan">
-                          </div>
+                          
                           <div class="form-group">
                             <label>Kelengkapan</label>
                             <input class="form-control" type="text" name="kelengkapan" id="edit_kelengkapan">
+
+                            <input type="hidden" name="id_pemohon" id="old_nrp">
                           </div>
                           <div class="form-group">
                             <label>Nomor Senjata Api</label>
@@ -222,11 +198,11 @@
                         type: 'POST',
                         data: {
                             change: true,
-                            nrp: nrp
+                            id_pemohon: nrp
                         },
                         success: function(response) {
                             $('#btn-' + nrp).html(response);
-                            // window.location = '<?= base_url('admin/pemohon') ?>';
+                            window.location = '<?= base_url('admin/pemohon') ?>';
                         },
                         error: function (e) {
                             console.log(e.responseText);
@@ -239,7 +215,7 @@
                         url: "<?= base_url('admin/pemohon') ?>",
                         type: 'POST',
                         data: {
-                            nrp: nrp,
+                            id_pemohon: nrp,
                             delete: true
                         },
                         success: function() {
@@ -252,7 +228,7 @@
                     $.get('<?= base_url('admin/pemohon?nrp=') ?>' + nrp, function(response) {
                         console.log('<?= base_url('admin/pemohon?nrp=') ?>' + nrp);
                         var json = JSON.parse(response);
-                        $('#old_nrp').val(json.nrp);
+                        $('#old_nrp').val(json.id_pemohon);
                         $('#edit_nrp').val(json.nrp);
                         $('#edit_nama_anggota').val(json.nama_anggota);
                         $('#edit_pangkat').val(json.pangkat);

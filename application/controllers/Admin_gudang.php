@@ -32,7 +32,7 @@ class Admin_gudang extends MY_Controller
   public function senpi()
   {
     if ($this->POST('add')) {
-      $required = ['jenis','merk','kaliber','kondisi','jumlah'];
+      $required = ['jenis','merk','kaliber','kondisi','jumlah','keterangan'];
       if (!$this->Senjata_api_m->required_input($required)) {
         $this->flashmsg('Data harus lengkap!','warning');
         redirect('admin-gudang/senpi');
@@ -58,7 +58,7 @@ class Admin_gudang extends MY_Controller
     }
 
     if ($this->POST('edit')) {
-      $required = ['jenis','merk','kaliber','kondisi','jumlah'];
+      $required = ['jenis','merk','kaliber','kondisi','jumlah','keterangan'];
       if (!$this->Senjata_api_m->required_input($required)) {
         $this->flashmsg('Data harus lengkap!','warning');
         redirect('admin-gudang/senpi');

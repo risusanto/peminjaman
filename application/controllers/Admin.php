@@ -20,6 +20,7 @@ class Admin extends MY_Controller
         }
 
         $this->load->model('Pemohon_m');
+        $this->load->model('Data_pemohon_m');
     }
 
     public function index()
@@ -40,19 +41,19 @@ class Admin extends MY_Controller
     {
         if($this->POST('change'))
         {
-            $nrp = $this->POST('nrp');
-            $cek_pemohon = $this->Pemohon_m->get_row(['nrp' => $nrp]);
+            $id_pemohon = $this->POST('id_pemohon');
+            $cek_pemohon = $this->Pemohon_m->get_row(['id_pemohon' => $id_pemohon]);
 
             if ($cek_pemohon->status == '1')
             {
-                $this->Pemohon_m->update($nrp, ['status' => '0']);
-                echo '<button class="btn btn-danger" onclick="changeStatus('.$nrp.')"><i class="fa fa-close"></i> Tidak</button>';
+                $this->Pemohon_m->update($id_pemohon, ['status' => '0']);
+                echo '<button class="btn btn-danger" onclick="changeStatus('.$id_pemohon.')"><i class="fa fa-close"></i> Tidak</button>';
                 exit;
             }
             else
             {
-                $this->Pemohon_m->update($nrp, ['status' => '1']);
-                echo '<button class="btn btn-success" onclick="changeStatus('.$nrp.')"><i class="fa fa-check"></i> Iya</button>'; 
+                $this->Pemohon_m->update($id_pemohon, ['status' => '1']);
+                echo '<button class="btn btn-success" onclick="changeStatus('.$id_pemohon.')"><i class="fa fa-check"></i> Iya</button>'; 
                 exit;
             }
         }
@@ -80,16 +81,11 @@ class Admin extends MY_Controller
         if ($this->POST('edit'))
         {
             $this->data['pemohon'] = [
-                'nrp'           => $this->POST('nrp'),
-                'nama_anggota'  => $this->POST('nama_anggota'),
-                'pangkat'       => $this->POST('pangkat'),
-                'jabatan'       => $this->POST('jabatan'),
-                'kesatuan'      => $this->POST('kesatuan'),
                 'kelengkapan'   => $this->POST('kelengkapan'),
                 'no_senpi'      => $this->POST('no_senpi'),
                 'jumlah_amunisi'=> $this->POST('jumlah_amunisi')
             ];
-            $this->Pemohon_m->update($this->POST('old_nrp'), $this->data['pemohon']);
+            $this->Pemohon_m->update($this->POST('id_pemohon'), $this->data['pemohon']);
             $this->flashmsg('<i class="glyphicon glyphicon-success"></i> Data pemohon berhasil di-edit');
             redirect('admin/pemohon');
             exit;
@@ -97,7 +93,7 @@ class Admin extends MY_Controller
 
         if ($this->input->get('nrp'))
         {
-            $this->data['pemohon'] = $this->Pemohon_m->get_row(['nrp' => $this->input->get('nrp')]);
+            $this->data['pemohon'] = $this->Pemohon_m->get_row(['id_pemohon' => $this->input->get('nrp')]);
             $no_senpi = [];
             $this->data['senpi']    = $this->senjata_api_m->get();
             foreach ($this->data['senpi'] as $senpi)
@@ -109,7 +105,7 @@ class Admin extends MY_Controller
 
         if ($this->POST('delete')) 
         {
-            $this->Pemohon_m->delete($this->POST('nrp'));
+            $this->Pemohon_m->delete($this->POST('id_pemohon'));
         }
 
 
@@ -155,7 +151,7 @@ class Admin extends MY_Controller
         {
             $this->data['berita_acara'] = [
                 'no_ba'     => $this->POST('no_ba'),
-                'nrp'       => $this->POST('nrp'),
+                'id_pemohon'       => $this->POST('id_pemohon'),
                 'no_senpi'  => $this->POST('no_senpi'),
                 'no_amunisi'=> $this->POST('no_amunisi')
             ];
@@ -169,7 +165,7 @@ class Admin extends MY_Controller
         {
             $this->data['berita_acara'] = [
                 'no_ba'     => $this->POST('no_ba'),
-                'nrp'       => $this->POST('nrp'),
+                'id_pemohon'       => $this->POST('id_pemohon'),
                 'no_senpi'  => $this->POST('no_senpi'),
                 'no_amunisi'=> $this->POST('no_amunisi')
             ];
@@ -187,11 +183,11 @@ class Admin extends MY_Controller
             foreach ($this->data['senpi'] as $senpi)
                 $no_senpi[$senpi->no_senpi] = $senpi->no_senpi;
             $this->data['berita_acara']->dropdown_senpi = form_dropdown('no_senpi', $no_senpi, $this->data['berita_acara']->no_senpi, ['class' => 'form-control']);
-            $nrp = [];
+            $id_pemohon = [];
             $this->data['pemohon']    = $this->pemohon_m->get();
             foreach ($this->data['pemohon'] as $pemohon)
-                $nrp[$pemohon->nrp] = $pemohon->nrp;
-            $this->data['berita_acara']->dropdown_nrp = form_dropdown('nrp', $nrp, $this->data['berita_acara']->nrp, ['class' => 'form-control']);
+                $id_pemohon[$pemohon->id_pemohon] = $pemohon->id_pemohon;
+            $this->data['berita_acara']->dropdown_nrp = form_dropdown('id_pemohon', $id_pemohon, $this->data['berita_acara']->id_pemohon, ['class' => 'form-control']);
             $no_amunisi = [];
             $this->data['amunisi']    = $this->amunisi_m->get();
             foreach ($this->data['amunisi'] as $amunisi)

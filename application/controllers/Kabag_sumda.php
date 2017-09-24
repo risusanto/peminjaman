@@ -52,7 +52,6 @@ class Kabag_sumda extends MY_Controller
 
         $this->data['title']    ='Data Senjata Api';
         $this->data['senpi']    = $this->Senjata_api_m->get();
-        $this->data['pemohon']  = $this->Pemohon_m->get();
         $this->data['content']  = 'kabag_sumda/senpi';
         $this->template($this->data,'kabag_sumda');
     }
@@ -89,8 +88,11 @@ class Kabag_sumda extends MY_Controller
         }
 
         $this->data['senpi'] = $this->Senjata_api_m->get();
-        $this->data['pemohon'] = $this->Pemohon_m->get();
-
+        $pemohon = $this->Pemohon_m->get();
+        $this->data['total_amunisi'] = 0;
+        foreach ($pemohon as $key) {
+            $this->data['total_amunisi'] = $this->data['total_amunisi'] = $key->jumlah_amunisi;
+        }
         // if($data_senpi->no_senpi == $data_pemohon->no_senpi)
         //{
 

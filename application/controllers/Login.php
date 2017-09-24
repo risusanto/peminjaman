@@ -26,6 +26,9 @@ class Login extends MY_Controller
 				case 3:
 					redirect('admin-gudang');
 					break;
+				case 4:
+					redirect('pemohon');
+					break;
 			}
 
 			exit;

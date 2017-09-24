@@ -20,6 +20,9 @@ class MY_Controller extends CI_Controller
       elseif ($template == 'admin-gudang') {
 	      return $this->load->view('admin-gudang/template/layout', $data);
 	    }
+	    elseif ($template == 'pemohon') {
+	      return $this->load->view('pemohon/template/layout', $data);
+	    }
 	}
 
 	public function POST($name)

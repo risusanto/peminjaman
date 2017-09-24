@@ -26,6 +26,7 @@
                                                 <th>Kaliber</th>
                                                 <th>Jumlah</th>
                                                 <th>Kondisi</th>
+                                                <th>Keterangan</th>
                                                 <th>Opsi</th>
                                             </tr>
                                         </thead>
@@ -38,6 +39,7 @@
                                                 <td><?= $row->kaliber ?></td>
                                                 <td><?= $row->jumlah ?></td>
                                                 <td><?= $row->kondisi ?></td>
+                                                <td><?= $row->keterangan ?></td>
                                                 <td>
                                                   <button data-toggle="modal" data-target="#edit" class="btn btn-primary btn-sm" onclick="get_edit(<?= $row->no_senpi ?>)"><i class="fa fa-pencil"></i></button>
                                                   <button class="btn btn-danger btn-sm" onclick="deleteData(<?= $row->no_senpi ?>)"><i class="fa fa-trash"></i></button>
@@ -94,6 +96,11 @@
                                                 <option>Rusak</option>
                                             </select>
                                         </div>
+                                          <div class="form-group">
+                                            <label>Keterangan</label>
+                                            <input class="form-control" type="text" name="keterangan" required="true">
+                                            <p class="help-block">Keterangan</p>
+                                          </div>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
@@ -139,6 +146,11 @@
                                             <input class="form-control" type="text" id="edit_kondisi" name="kondisi" required="true">
                                             <p class="help-block">Contoh: Baik, Kurang Baik.</p>
                                           </div>
+                                          <div class="form-group">
+                                            <label>Keterangan</label>
+                                            <input class="form-control" type="text" id="edit_keterangan" name="keterangan" required="true">
+                                            <p class="help-block">Keterangan</p>
+                                          </div>
                                           <input type="hidden" id="no_senpi" name="no_senpi">
                                         </div>
                                         <div class="modal-footer">
@@ -171,6 +183,7 @@
                             $('#edit_jumlah').val(response.jumlah);
                             $('#edit_kaliber').val(response.kaliber);
                             $('#edit_kondisi').val(response.kondisi);
+                            $('#edit_keterangan').val(response.kondisi);
                         }
                     });
                 }

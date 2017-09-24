@@ -37,8 +37,8 @@
                                         <td><?= $row->kaliber ?></td>
                                         <td><?= $row->jumlah ?></td>
                                         <td>
-                                            <?php if($row->no_senpi == $pemohon->no_senpi){
-                                                    echo $row->jumlah - 1;
+                                            <?php if($this->Pemohon_m->get(['no_senpi' => $row->no_senpi])){
+                                                    echo  count($this->Pemohon_m->get(['no_senpi' => $row->no_senpi]));
                                                 } else {
                                                     echo '0';
                                                 }
@@ -50,7 +50,7 @@
                                 </tbody>
                             </table>
                             <!-- /.table-responsive -->
-                            <a href="<?= base_url('kapolres/senpi/cetak') ?>" class="btn btn-primary btn-lg"><i class="fa fa-download"></i> CETAK</a>
+                            <a href="<?= base_url('kabag_sumda/senpi/cetak') ?>" class="btn btn-primary btn-lg"><i class="fa fa-download"></i> CETAK</a>
                         </div>
                         <!-- /.panel-body -->
                     </div>

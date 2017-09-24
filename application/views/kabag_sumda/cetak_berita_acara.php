@@ -92,7 +92,7 @@
 					<?php foreach($berita as $row): ?>
                     <tr>
                         <td><?= $row->no_ba ?></td>
-                        <td><?= $row->nrp ?></td>
+                        <td><?= $this->Pemohon_m->get_row(['id_pemohon'=>$row->id_pemohon])->nrp ?></td>
                         <td><?= $row->no_senpi ?></td>
                         <td><?= $row->no_amunisi ?></td>
                     </tr>

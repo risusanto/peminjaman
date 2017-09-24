@@ -38,12 +38,7 @@
                                         <td><?= $row->jumlah ?></td>
                                         <td>
                                             <?php  
-                                                if(isset($pemohon->jumlah_amunisi)){
-                                                    $amunisi = $row->jumlah - $pemohon->jumlah_amunisi;
-                                                    echo $amunisi;
-                                                } else {
-                                                    echo '0';
-                                                }
+                                                echo $total_amunisi;
                                             ?>
                                         </td>
                                         <td><?= $row->kondisi ?></td>
@@ -52,7 +47,7 @@
                                 </tbody>
                             </table>
                             <!-- /.table-responsive -->
-                            <a href="<?= base_url('kapolres/amunisi/cetak') ?>" class="btn btn-primary btn-lg"><i class="fa fa-download"></i> CETAK</a>
+                            <a href="<?= base_url('kabag_sumda/amunisi/cetak') ?>" class="btn btn-primary btn-lg"><i class="fa fa-download"></i> CETAK</a>
                         </div>
                         <!-- /.panel-body -->
                     </div>
