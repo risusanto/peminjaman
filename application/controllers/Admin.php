@@ -103,7 +103,7 @@ class Admin extends MY_Controller
             exit;
         }
 
-        if ($this->POST('delete')) 
+        if ($this->POST('delete'))
         {
             $this->Pemohon_m->delete($this->POST('id_pemohon'));
         }
@@ -204,5 +204,10 @@ class Admin extends MY_Controller
         $this->data['berita_acara']     = $this->berita_acara_m->get();
         $this->data['content']          = 'admin/berita_acara';
         $this->template($this->data);
+    }
+
+    public function cetak_berita_acara()
+    {
+      $this->load->view('laporan/berita-acara');
     }
 }
