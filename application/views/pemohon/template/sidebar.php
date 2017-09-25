@@ -50,7 +50,7 @@
                             <a href="<?= base_url('pemohon/pemohon') ?>"><i class="fa fa-user fa-fw"></i> Data Permohonan</a>
                         </li>
                         <li>
-                            <a href="<?= base_url('pemohon/profile') ?>"><i class="fa fa-user"></i> Profil</a>
+                            <a href="<?= base_url('pemohon/profil') ?>"><i class="fa fa-user"></i> Profil</a>
                         </li>
                     </ul>
                 </div>

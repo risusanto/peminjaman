@@ -1,7 +1,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">Data Berita Acara</h1>
-                    <?php  
+                    <?php
                         $msg = $this->session->flashdata('msg');
                         if (isset($msg)) echo $msg;
                     ?>
@@ -50,6 +50,8 @@
                                                         </li>
                                                         <li><a href="#" onclick="delete_berita_acara(<?= $row->no_ba ?>)">Hapus</a>
                                                         </li>
+                                                        <li><a href="<?=base_url('admin/cetak-berita-acara/'.$row->no_ba)?>">Cetak</a>
+                                                        </li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -86,7 +88,7 @@
                           <div class="form-group">
                             <label>Id Pemohon</label>
                             <select class="form-control" name="id_pemohon">
-                                <?php  
+                                <?php
                                     if (!isset($pemohon))
                                     {
                                         echo '<option>Data pemohon tidak tersedia</option>';
@@ -100,7 +102,7 @@
                           <div class="form-group">
                             <label>No. Senjata Api</label>
                             <select class="form-control" name="no_senpi">
-                                <?php  
+                                <?php
                                     if (!isset($senpi))
                                     {
                                         echo '<option>Data senjata api tidak tersedia</option>';
@@ -114,7 +116,7 @@
                           <div class="form-group">
                             <label>No. Amunisi</label>
                             <select class="form-control" name="no_amunisi">
-                                <?php  
+                                <?php
                                     if (!isset($amunisi))
                                     {
                                         echo '<option>Data amunisi tidak tersedia</option>';

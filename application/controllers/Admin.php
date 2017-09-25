@@ -53,7 +53,7 @@ class Admin extends MY_Controller
             else
             {
                 $this->Pemohon_m->update($id_pemohon, ['status' => '1']);
-                echo '<button class="btn btn-success" onclick="changeStatus('.$id_pemohon.')"><i class="fa fa-check"></i> Iya</button>'; 
+                echo '<button class="btn btn-success" onclick="changeStatus('.$id_pemohon.')"><i class="fa fa-check"></i> Iya</button>';
                 exit;
             }
         }
@@ -208,6 +208,20 @@ class Admin extends MY_Controller
 
     public function cetak_berita_acara()
     {
-      $this->load->view('laporan/berita-acara');
+      $this->load->model('Berita_acara_m');
+      $this->load->model('Data_pemohon_m');
+      $this->load->model('Pemohon_m');
+      $this->load->model('Senjata_api_m');
+      $this->data['berita'] = $this->Berita_acara_m->get_row(['no_ba' => $this->uri->segment(3)]);
+      $this->data['permohonan'] = $this->Pemohon_m->get_row(['id_pemohon' => $this->data['berita']->id_pemohon]);
+      $this->data['senpi'] = $this->Senjata_api_m->get_row(['no_senpi' => $this->data['berita']->no_senpi]);
+      $nrp = $this->Pemohon_m->get_row(['id_pemohon' => $this->data['permohonan']->id_pemohon])->nrp;
+      $this->data['pemohon'] = $this->Data_pemohon_m->get_row(['nrp' => $nrp]);
+
+      $html = $this->load->view('laporan/berita-acara', $this->data, true);
+    	$pdfFilePath = 'Berita Acara.pdf';
+    	$this->load->library('m_pdf');
+    	$this->m_pdf->pdf->WriteHTML($html);
+    	$this->m_pdf->pdf->Output($pdfFilePath, "D");
     }
 }
